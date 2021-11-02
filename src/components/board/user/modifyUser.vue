@@ -6,6 +6,14 @@
         
         <b-button @click="modify">변경</b-button>
 
+      <div v-if="modified">
+        <b-table
+        hover
+        striped
+        :fields="fields"
+        :items="items">
+        </b-table>
+      </div>
     </div>
     
 </template>
@@ -16,11 +24,16 @@ export default {
       id: "",
       name: "",
       job: "",
+      modified: false,
+      fields: ["put/patch", "name", "job", "updatedAt"],
+      items: "",
     };
   },
   methods: {
     modify() {
+      let resForItem;
       if (this.job) {
+        console.log("");
         let body = {
           name: this.name,
           job: this.job,
@@ -28,7 +41,9 @@ export default {
         this.$axios
           .put(`https://reqres.in/api/users/${this.id}`, body)
           .then((res) => {
-            console.log(res);
+            resForItem = res.data;
+
+            this.modified = true;
           })
           .catch((err) => {
             console.log(err);
@@ -41,12 +56,20 @@ export default {
         this.$axios
           .patch("https://reqres.in/api/users", body)
           .then((res) => {
-            console.log(res);
+            resForItem = res.data;
+            //console.log(res);
           })
           .catch((err) => {
             console.log(err);
           });
       }
+      this.items = [
+        {
+          name: resForItem.name,
+          job: resForItem.job,
+          updatedAt: resForItem.updatedAt,
+        },
+      ];
     },
   },
 };

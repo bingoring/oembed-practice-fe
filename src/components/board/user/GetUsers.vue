@@ -49,16 +49,20 @@ export default {
       });
     },
   },
-  created() {
-    this.$axios
-      .get("https://reqres.in/api/users")
-      .then((res) => {
-        this.items = res.data.data;
-        console.log(res);
-      })
-      .then((err) => {
-        console.log(err);
-      });
+  async created() {
+    // this.$axios
+    //   .get("https://reqres.in/api/users")
+    //   .then((res) => {
+    //     this.items = res.data.data;
+    //     console.log(res);
+    //   })
+    //   .then((err) => {
+    //     console.log(err);
+    //   });
+
+    let tmpData = await this.$axios.get("https://reqres.in/api/users");
+    if (tmpData === undefined) return { code: 500 };
+    this.items = tmpData.data.data;
   },
   computed: {
     rows() {
