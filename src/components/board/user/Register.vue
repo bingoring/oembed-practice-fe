@@ -13,6 +13,18 @@
       >저장</b-button
     >&nbsp;
     <b-button @click="cancle">취소</b-button>
+
+    <div v-if="registered">
+      <b-table
+        striped
+        hover
+        :items="items"
+        :per-page="perPage"
+        :current-page="currentPage"
+        :fields="fields"
+        @row-clicked="rowClick"
+      ></b-table>
+    </div>
   </div>
 </template>
 
@@ -25,28 +37,42 @@ export default {
       job: "",
       updateObject: null,
       updateMode: this.$route.params.userId > 0 ? true : false,
+
+      registered: false,
+      items: "",
+      fields: ["id", "name", "job"],
     };
   },
   created() {},
   methods: {
-    uploadContent() {
+    async uploadContent() {
       // 저장
       let body = {
         name: this.name,
         job: this.job,
       };
-      this.$axios
+      await this.$axios
         .post("https://reqres.in/api/users", body)
         .then((res) => {
-          console.log(res);
+          //this.items = res.data;
+          let item = [
+            {
+              id: res.data.id,
+              name: res.data.name,
+              job: res.data.job,
+            },
+          ];
+          this.registered = true;
+          this.items = item;
+          console.log(this.items);
         })
         .catch((err) => {
           console.log(err);
         });
 
-      this.$router.push({
-        path: "/auth/getUsers",
-      });
+      //this.$router.push({
+      // path: "/auth/getUsers",
+      //});
     },
     updateContent() {
       // 수정
