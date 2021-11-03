@@ -51,24 +51,23 @@ export default {
         name: this.name,
         job: this.job,
       };
-      await this.$axios
-        .post("https://reqres.in/api/users", body)
-        .then((res) => {
-          //this.items = res.data;
-          let item = [
-            {
-              id: res.data.id,
-              name: res.data.name,
-              job: res.data.job,
-            },
-          ];
-          this.registered = true;
-          this.items = item;
-          console.log(this.items);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+
+      let res = await this.$axios.post("https://reqres.in/api/users", body);
+
+      if (res) {
+        let item = [
+          {
+            id: res.data.id,
+            name: res.data.name,
+            job: res.data.job,
+          },
+        ];
+        this.registered = true;
+        this.items = item;
+        console.log(this.items);
+      } else {
+        console.log("err");
+      }
 
       //this.$router.push({
       // path: "/auth/getUsers",

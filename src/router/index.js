@@ -1,8 +1,5 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import BoardList from "@/components/board/BoardList";
-import BoardDetail from "@/components/board/BoardDetail";
-import BoardCreate from "@/components/board/BoardCreate";
 import MainPage from "@/components/board/MainPage";
 import GetUsers from "@/components/board/user/GetUsers";
 import Register from "@/components/board/user/Register"
@@ -21,11 +18,6 @@ export default new VueRouter({
       path: "/main",
       name: "MainPage",
       component: MainPage
-    },
-    {
-      path: "/crud",
-      name: "BoardList",
-      component: BoardList
     },
     {
       path: "/auth/getUsers",
@@ -51,16 +43,6 @@ export default new VueRouter({
       path: "/auth/deleteUser",
       namee: "DeleteUser",
       component: DeleteUser,
-    },
-    {
-      path: "/board/detail/:contentId",
-      name: "BoardDetail",
-      component: BoardDetail
-    },
-    {
-      path: "/board/create/:contentId?",
-      name: "BoardCreate",
-      component: BoardCreate
     },
     {
       path: "*",

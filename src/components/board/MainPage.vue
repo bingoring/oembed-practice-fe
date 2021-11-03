@@ -1,14 +1,16 @@
 <template lang="">
     <div>
-        <div>
-            <a href="javascript:;" to="/auth/getUsers" @click="onclick1">사용자 조회</a>
+        <div class="container">
+            <b-button variant="outline-primary" @click="onclick1">사용자 조회</b-button>
         </div>
-        <div>
-            <a href="javascript:;" to="/auth/register" @click="onclick2">사용자 생성</a>
+        <div class="container">
+            <b-button variant="outline-primary" @click="onclick2">사용자 생성</b-button>
         </div>
-            <a href="javascript:;" to="/auth/modifyUser" @click="onclick3">사용자 정보 수정</a>
-        <div>
-            <a href="javascript:;" to="/auth/deleteUser" @click="onclick4">사용자 삭제</a>
+        <div class="container">
+            <b-button variant="outline-primary" @click="onclick3">사용자 정보 수정</b-button>
+        </div>
+        <div class="container">
+            <b-button variant="outline-primary" @click="onclick4">사용자 삭제</b-button>
         </div>
 
         <!-- <a href="javascript:;" to="/auth/modifyUser">사용자 정보 수정(부분)</a> -->
@@ -43,5 +45,8 @@ export default {
   },
 };
 </script>
-<style lang="">
+<style scoped>
+.container {
+  margin-top: 1rem;
+}
 </style>

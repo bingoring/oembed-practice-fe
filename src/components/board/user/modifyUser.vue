@@ -30,46 +30,52 @@ export default {
     };
   },
   methods: {
-    modify() {
-      let resForItem;
+    async modify() {
       if (this.job) {
-        console.log("");
         let body = {
           name: this.name,
           job: this.job,
         };
-        this.$axios
-          .put(`https://reqres.in/api/users/${this.id}`, body)
-          .then((res) => {
-            resForItem = res.data;
 
-            this.modified = true;
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        let res = await this.$axios.put(
+          `https://reqres.in/api/users/${this.id}`,
+          body
+        );
+
+        if (res) {
+          this.items = [
+            {
+              name: res.data.name,
+              job: res.data.job,
+              updatedAt: res.data.updatedAt,
+            },
+          ];
+          this.modified = true;
+          console.log(res);
+        } else {
+          console.log(res);
+        }
       } else {
         console.log("patch");
         let body = {
           name: this.name,
         };
-        this.$axios
-          .patch("https://reqres.in/api/users", body)
-          .then((res) => {
-            resForItem = res.data;
-            //console.log(res);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+
+        let res = this.$axios.patch("https://reqres.in/api/users", body);
+
+        if (res) {
+          this.items = [
+            {
+              name: res.data.name,
+              job: res.data.job,
+              updatedAt: res.data.updatedAt,
+            },
+          ];
+          console.log(res);
+        } else {
+          console.log(res);
+        }
       }
-      this.items = [
-        {
-          name: resForItem.name,
-          job: resForItem.job,
-          updatedAt: resForItem.updatedAt,
-        },
-      ];
     },
   },
 };
