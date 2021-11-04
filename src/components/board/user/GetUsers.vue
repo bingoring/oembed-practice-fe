@@ -30,10 +30,10 @@ export default {
   data() {
     return {
       currentPage: 1, // 현재 페이지
-      perPage: 2, // 페이지당 보여줄 게시물 갯수
+      perPage: 6, // 페이지당 보여줄 게시물 갯수
       // bootstrap 'b-table' 필드 설정
       fields: ["id", "first_name", "last_name", "email"],
-      items: "",
+      items: [],
     };
   },
   methods: {
@@ -59,10 +59,28 @@ export default {
     //   .then((err) => {
     //     console.log(err);
     //   });
+    //console.log(await this.$axios.get(`https://reqres.in/api/users?page=1`));
 
-    let tmpData = await this.$axios.get("https://reqres.in/api/users");
-    if (tmpData === undefined) return { code: 500 };
-    this.items = tmpData.data.data;
+    const firstData = await this.$axios.get(
+      `https://reqres.in/api/users?page=1`
+    );
+    this.items = firstData.data.data;
+
+    let pageNum = 2;
+    while (
+      (await this.$axios.get(`https://reqres.in/api/users?page=${pageNum}`))
+        .data.data[0]
+    ) {
+      var tmpData = await this.$axios.get(
+        `https://reqres.in/api/users?page=${pageNum}`
+      );
+
+      pageNum++;
+
+      tmpData.data.data.forEach((data) => {
+        this.items.push(data);
+      });
+    }
   },
   computed: {
     rows() {

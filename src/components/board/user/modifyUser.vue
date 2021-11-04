@@ -45,6 +45,7 @@ export default {
         if (res) {
           this.items = [
             {
+              "put/patch": "put",
               name: res.data.name,
               job: res.data.job,
               updatedAt: res.data.updatedAt,
@@ -61,16 +62,19 @@ export default {
           name: this.name,
         };
 
-        let res = this.$axios.patch("https://reqres.in/api/users", body);
+        let res = await this.$axios.patch("https://reqres.in/api/users", body);
 
         if (res) {
           this.items = [
             {
+              "put/patch": "patch",
               name: res.data.name,
               job: res.data.job,
               updatedAt: res.data.updatedAt,
             },
           ];
+          this.modified = true;
+
           console.log(res);
         } else {
           console.log(res);
