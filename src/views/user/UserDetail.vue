@@ -13,8 +13,6 @@
 </template>
 
 <script>
-import data from "@/data";
-
 export default {
   name: "BoardDetail",
   data() {
@@ -27,15 +25,6 @@ export default {
     };
   },
   methods: {
-    deleteData() {
-      const content_index = data.Content.findIndex(
-        (contentItem) => contentItem.content_id === this.contentId
-      );
-      data.Content.splice(content_index, 1); // 데이터 삭제
-      this.$router.push({
-        path: "/",
-      });
-    },
     updateData() {
       this.$router.push({
         path: `/board/create/${this.contentId}`,

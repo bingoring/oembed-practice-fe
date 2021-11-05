@@ -23,6 +23,8 @@ export default {
   },
   methods: {
     deleteUser() {
+      //let deleteResult =
+
       this.$axios
         .delete(`https://reqres.in/api/users/${this.id}`)
         .then((res) => {

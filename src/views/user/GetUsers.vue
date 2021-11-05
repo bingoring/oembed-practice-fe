@@ -50,17 +50,6 @@ export default {
     },
   },
   async created() {
-    // this.$axios
-    //   .get("https://reqres.in/api/users")
-    //   .then((res) => {
-    //     this.items = res.data.data;
-    //     console.log(res);
-    //   })
-    //   .then((err) => {
-    //     console.log(err);
-    //   });
-    //console.log(await this.$axios.get(`https://reqres.in/api/users?page=1`));
-
     const firstData = await this.$axios.get(
       `https://reqres.in/api/users?page=1`
     );
