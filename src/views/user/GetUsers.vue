@@ -24,9 +24,11 @@
 </template>
 
 <script>
+import { mapState } from "vuex";
+import { CLICK_USER } from "../../store";
+import UserDetail from "./UserDetail";
 export default {
   name: "BoardList",
-
   data() {
     return {
       currentPage: 1, // 현재 페이지
@@ -36,11 +38,19 @@ export default {
       items: [],
     };
   },
+  components: {
+    UserDetail,
+  },
   methods: {
     rowClick(items) {
       //console.log(items.id);
+
+      this.$store.commit(CLICK_USER, {
+        id: items.id,
+      });
+
       this.$router.push({
-        path: `/auth/userDetail/${items.id}`,
+        path: `/auth/userDetail/`,
       });
     },
     registerUser() {

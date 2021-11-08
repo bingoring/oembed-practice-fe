@@ -3,6 +3,7 @@ import BootstrapVue from "bootstrap-vue";
 import App from "./App.vue";
 import router from "./router";
 import axios from 'axios'; //axios 호출
+import { store } from './store/index';
 
 // https://bootstrap-vue.js.org/
 import "bootstrap/dist/css/bootstrap.css";
@@ -13,6 +14,7 @@ Vue.config.productionTip = false;
 Vue.use(BootstrapVue);
 
 new Vue({
+  store,
   router, // 라우터 객체를 넘겨준다
   render: h => h(App)
 }).$mount("#app");

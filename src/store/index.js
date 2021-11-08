@@ -2,20 +2,26 @@
 
 import Vue from 'vue';
 import Vuex from 'vuex';
-import mutations from './mutations.js';
+//import mutations from './mutations.js';
 import actions from './actions.js';
 
 Vue.use(Vuex);
 
-export const tore = new Vue.Store({
+export const CLICK_USER = 'CLICK_USER';
+
+export const store = new Vuex.Store({
     state: {
         id: "",
     },
     getters: {
-        fetchedId(state) {
+        getFetchedId(state) {
             return state.id;
         }
     },
-    mutations,
+    mutations: {
+        [CLICK_USER](state, { id }) {
+            state.id = id;
+        }
+    },
     actions
 })

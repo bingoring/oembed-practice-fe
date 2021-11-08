@@ -31,6 +31,7 @@ export default {
   },
   methods: {
     async modify() {
+      /*
       if (this.job) {
         let body = {
           name: this.name,
@@ -80,6 +81,7 @@ export default {
           console.log(res);
         }
       }
+      */
     },
   },
 };

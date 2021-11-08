@@ -30,7 +30,7 @@ export default new VueRouter({
       component: Register,
     },
     {
-      path: "/auth/userDetail/:userId",
+      path: "/auth/userDetail/",
       name: "UserDetail",
       component: UserDetail,
     },
