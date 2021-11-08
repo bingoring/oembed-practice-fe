@@ -19,14 +19,13 @@ import { fetchSingleUser } from "../../api/index";
 export default {
   name: "UserDetail",
   data() {
-    return {
-      first_name: "",
-      last_name: "",
-    };
+    return {};
   },
   computed: {
     ...mapState({
-      id: (state) => state.id,
+      id: (state) => state.singleUserData.id,
+      first_name: (state) => state.singleUserData.first_name,
+      last_name: (state) => state.singleUserData.last_name,
     }),
   },
   methods: {
@@ -38,14 +37,18 @@ export default {
     // },
   },
   async created() {
-    try {
-      let res = await fetchSingleUser(Number(this.$store.getters.getFetchedId));
-      this.first_name = res.data.data.first_name;
-      this.last_name = res.data.data.last_name;
-    } catch {
-      console.log("error occured");
-    }
+    await this.$store.dispatch(
+      "GET_SINGLE_USER",
+      this.$store.getters.getFetchedId
+    );
 
+    // try {
+    //   let res = await fetchSingleUser(Number(this.$store.getters.getFetchedId));
+    //   this.first_name = res.data.data.first_name;
+    //   this.last_name = res.data.data.last_name;
+    // } catch (err) {
+    //   console.log(`error occured: ${err}`);
+    // }
     // fetchSingleUser(Number(this.$store.getters.getFetchedId)).then((res) => {
     //   this.first_name = res.data.data.first_name;
     //   this.last_name = res.data.data.last_name;

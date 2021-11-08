@@ -25,8 +25,8 @@
 
 <script>
 import { mapState } from "vuex";
-import { CLICK_USER } from "../../store";
-import UserDetail from "./UserDetail";
+//import { GET_SINGLE_USER, FETCH_SINGLE_USER_ID } from "../../store";
+//import UserDetail from "./UserDetail";
 export default {
   name: "BoardList",
   data() {
@@ -35,19 +35,13 @@ export default {
       perPage: 6, // 페이지당 보여줄 게시물 갯수
       // bootstrap 'b-table' 필드 설정
       fields: ["id", "first_name", "last_name", "email"],
-      items: [],
     };
-  },
-  components: {
-    UserDetail,
   },
   methods: {
     rowClick(items) {
       //console.log(items.id);
-
-      this.$store.commit(CLICK_USER, {
-        id: items.id,
-      });
+      this.$store.dispatch("FETCH_SINGLE_USER_ID", items.id);
+      //this.$store.dispatch("GET_SINGLE_USER");
 
       this.$router.push({
         path: `/auth/userDetail/`,
@@ -60,6 +54,10 @@ export default {
     },
   },
   async created() {
+    await this.$store.dispatch("FETCH_USERS");
+    console.log(this.$store.getters.getAllUserData);
+
+    /*
     const firstData = await this.$axios.get(
       `https://reqres.in/api/users?page=1`
     );
@@ -80,11 +78,15 @@ export default {
         this.items.push(data);
       });
     }
+    */
   },
   computed: {
     rows() {
-      return this.items.length;
+      return this.$store.getters.getAllUserData.length;
     },
+    ...mapState({
+      items: (state) => state.allUserData,
+    }),
   },
 };
 
