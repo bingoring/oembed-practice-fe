@@ -11,24 +11,11 @@ export const CLICK_USER = 'CLICK_USER';
 
 export const store = new Vuex.Store({
     state: {
-        singleUserId: "",
-        allUserData: [],
-        singleUserData: [],
-        modifyUserData: {
-            id: "",
-            name: "",
-            job: "",
-        }
+        allEmbedData: [],
     },
     getters: {
-        getFetchedId(state) {
-            return state.singleUserId;
-        },
-        getAllUserData(state) {
-            return state.allUserData;
-        },
-        getSingleUserData(state) {
-            return state.singleUserData;
+        getAllEmbedData(state){
+            return state.allEmbedData;
         }
     },
     mutations,
